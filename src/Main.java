@@ -1,25 +1,35 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    public static int momento = 0;
+    public static int momentoActual = 0;
+    public static int momentoInicio = 0;
+    public static int momentoFinal = 0;
     public static void main(String[] arg){
-
-        Proceso p1 = new Proceso("P1", 6);
-        Proceso p2 = new Proceso("P2", 8);
-        Proceso p3 = new Proceso("P3", 3);
-        Proceso p4 = new Proceso("P4", 3);
+        Scanner sc = new Scanner(System.in);
 
         ArrayList<Proceso> procesos = new ArrayList<>();
-        procesos.add(p1);
-        procesos.add(p2);
-        procesos.add(p3);
-        procesos.add(p4);
+
+        System.out.println("====== Simulación de algoritmo SJF (Shortest Job First) ======");
+        System.out.print("\n¿Cuántos procesos se van a ejecutar?: ");
+        int ejecuciones = sc.nextInt();
+
+        for (int i = 0; i < ejecuciones; i++) {
+            System.out.print("\n\tNombre: ");
+            String nombre = sc.next();
+            System.out.print("\tTiempo de llegada: ");
+            int llegada = sc.nextInt();
+            System.out.print("\tTiempo de ráfaga: ");
+            int rafaga = sc.nextInt();
+
+            procesos.add(new Proceso(nombre, llegada, rafaga));
+        }
+
 
         ColaProceso procesosOrdenados = new ColaProceso();
         procesosOrdenados.agregarProcesos(procesos);
-        procesosOrdenados.copiarProcesos();
 
-        System.out.println("\nLista de procesos");
+        System.out.println("\n1. Lista de procesos");
         System.out.println("-------------------------------");
         System.out.printf("| %-7s | %-17s |\n","", "     Tiempo    ");
         System.out.printf("| %-7s |%-7s|%-7s|\n", "Proceso", "---------", "---------");
@@ -27,32 +37,41 @@ public class Main {
         System.out.println("-------------------------------");
 
         for (Proceso p: procesos){
-            System.out.println(p.toString());
+            System.out.print(p.toString());
         }
 
         System.out.println("-------------------------------");
 
-        System.out.println("\nLista de procesos ordenados por ráfaga");
+        System.out.println("\n2. Lista de procesos ordenados por tiempo de llegada y ráfaga");
         System.out.println("-------------------------------");
         System.out.printf("| %-7s | %-17s |\n","", "     Tiempo    ");
         System.out.printf("| %-7s |%-7s|%-7s|\n", "Proceso", "---------", "---------");
         System.out.printf("| %-7s | %-7s | %-7s |\n", "", "Ráfaga", "Llegada");
         System.out.println("-------------------------------");
 
-        procesosOrdenados.mostrarCopia(); //Ayuda, no entiendo por qué funcionó esto. O soy muy bueno o tengo mucha suerte
+        procesosOrdenados.procesosOrdenados();
 
-        System.out.println("-------------------------------");
+        System.out.println("-------------------------------\n");
 
-        System.out.println("\nProcesos por ordenados por prioridad (tiempo de ráfaga)");
-        System.out.println("---------------------------------------");
-        System.out.printf("| %-8s | %-6s | %-12s |\n", "", "", "    Momento    ");
-        System.out.printf("| %-8s | %-6s |%-6s|%-6s|\n", "Proceso", "Ráfaga", "--------", "--------");
-        System.out.printf("| %-8s | %-6s | %-6s | %-6s |\n", "", "", "Inicio", " Fin");
-        System.out.println("---------------------------------------");
+        System.out.println("Fórmulas para las métricas");
+        System.out.println("Tiempo de respuesta = Tiempo finalización - tiempo de llegada");
+        System.out.println("Tiempo de espera = Tiempo de respuesta - tiempo de ráfaga");
+
+        System.out.println("\n3. Tabla de ejecución");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.printf("| %-7s | %-17s | %-12s | %-18s |\n", "", "     Tiempo    ", "    Momento    ", "      Tiempo     ");
+        System.out.printf("| %-7s |%-7s|%-7s|%-6s|%-6s|%-9s|%-6s|\n", "Proceso", "---------", "---------", "--------", "--------", "-----------", "--------");
+        System.out.printf("| %-7s | %-7s | %-7s | %-6s | %-6s | %-9s | %-6s |\n", "", "Llegada", "Ráfaga", "Inicio", " Fin", "Respuesta", "Espera");
+        System.out.println("----------------------------------------------------------------------");
 
         procesosOrdenados.ejecutarProcesos();
 
-        System.out.println("---------------------------------------");
+        System.out.println("----------------------------------------------------------------------\n");
 
+        System.out.printf("Tiempo promedio de respuesta: %.2f\n", procesosOrdenados.promedioRespuesta());
+        System.out.printf("Tiempo promedio de espera: %.2f", procesosOrdenados.promedioEspera());
     }
 }
+
+//Tiempo de respuesta = Tiempo finalización - tiempo de llegada
+//Tiempo de espera = Tiempo de respuesta - tiempo de ráfaga

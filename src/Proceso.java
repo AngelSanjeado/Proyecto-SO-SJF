@@ -1,13 +1,12 @@
-public class Proceso implements Comparable<Proceso>{
+public class Proceso{
     private int tiempoRafaga;
     private String nombre;
-    private int indice;
-    private static int contador;
+    private int tiempoLlegada;
 
-    public Proceso(String nombre, int tiempoRafaga){
+    public Proceso(String nombre, int tiempoLlegada, int tiempoRafaga){
         this.nombre = nombre;
+        this.tiempoLlegada = tiempoLlegada;
         this.tiempoRafaga = tiempoRafaga;
-        indice = ++contador;
     }
 
     public String getNombre(){
@@ -18,28 +17,25 @@ public class Proceso implements Comparable<Proceso>{
         return tiempoRafaga;
     }
 
-    public int getIndice(){
-        return indice;
+    public int getTiempoLlegada(){
+        return tiempoLlegada;
     }
 
-    @Override
-    public int compareTo(Proceso p2){
-        int menorRafaga = Integer.compare(this.tiempoRafaga, p2.tiempoRafaga);
+    public int tiempoRespuesta(){
+        return Main.momentoFinal - getTiempoLlegada();
+    }
 
-        if (menorRafaga == 0){
-            return Integer.compare(this.indice, p2.indice);
-        }
-
-        return menorRafaga;
+    public int tiempoEspera(){
+        return tiempoRespuesta() - getTiempoRafaga();
     }
 
     public String toString(){
-        return String.format("| %-7s | %-7d | %-7d |",getNombre(), getTiempoRafaga(), getIndice());
+        return String.format("| %-7s | %-7d | %-7d |\n",getNombre(), getTiempoRafaga(), getTiempoLlegada());
     }
 
     //No lo toquen, funciona, pero no entiendo por qué lo hace 💀💀
     public String mostrarOperacion(){
-        return String.format("| %-8s |  %-6d| %-6d | %-6d |\n", getNombre(), getTiempoRafaga(), Main.momento, (Main.momento + getTiempoRafaga()));
+        return String.format("| %-7s | %-7s | %-7s | %-6s | %-6s | %-9s | %-6s |\n", getNombre(), getTiempoLlegada(), getTiempoRafaga(), Main.momentoInicio, Main.momentoFinal, tiempoRespuesta(), tiempoEspera());
     }
 
 }
