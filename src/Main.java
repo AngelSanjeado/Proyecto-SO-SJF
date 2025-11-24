@@ -12,7 +12,7 @@ public class Main {
 
         ArrayList<Proceso> procesos = new ArrayList<>();
 
-        System.out.println("====== Simulación de algoritmo SJF (Shortest Job First) ======");
+        System.out.println("\n====== Simulación de algoritmo SJF (Shortest Job First) ======");
         System.out.print("\n¿Cuántos procesos se van a ejecutar?: ");
         int ejecuciones = sc.nextInt();
 
@@ -33,9 +33,8 @@ public class Main {
 
         System.out.println("\n1. Lista de procesos");
         System.out.println("-------------------------------");
-        System.out.printf("| %-7s | %-17s |\n","", "     Tiempo    ");
-        System.out.printf("| %-7s |%-7s|%-7s|\n", "Proceso", "---------", "---------");
-        System.out.printf("| %-7s | %-7s | %-7s |\n", "", "Ráfaga", "Llegada");
+        System.out.printf("| %-7s | %-7s | %-7s |\n","Proceso", "Ráfaga", "Tiempo");
+        System.out.printf("| %-7s | %-7s | %-7s |\n", "", "CPU", "Llegada");
         System.out.println("-------------------------------");
 
         for (Proceso p: procesos){
@@ -46,9 +45,8 @@ public class Main {
 
         System.out.println("\n2. Lista de procesos ordenados por tiempo de llegada y ráfaga");
         System.out.println("-------------------------------");
-        System.out.printf("| %-7s | %-17s |\n","", "     Tiempo    ");
-        System.out.printf("| %-7s |%-7s|%-7s|\n", "Proceso", "---------", "---------");
-        System.out.printf("| %-7s | %-7s | %-7s |\n", "", "Ráfaga", "Llegada");
+        System.out.printf("| %-7s | %-7s | %-7s |\n","Proceso", "Ráfaga", "Tiempo");
+        System.out.printf("| %-7s | %-7s | %-7s |\n", "", "CPU", "Llegada");
         System.out.println("-------------------------------");
 
         procesosOrdenados.procesosOrdenados();
@@ -61,9 +59,9 @@ public class Main {
 
         System.out.println("\n3. Tabla de ejecución");
         System.out.println("----------------------------------------------------------------------");
-        System.out.printf("| %-7s | %-17s | %-12s | %-18s |\n", "", "     Tiempo    ", "    Momento    ", "      Tiempo     ");
-        System.out.printf("| %-7s |%-7s|%-7s|%-6s|%-6s|%-9s|%-6s|\n", "Proceso", "---------", "---------", "--------", "--------", "-----------", "--------");
-        System.out.printf("| %-7s | %-7s | %-7s | %-6s | %-6s | %-9s | %-6s |\n", "", "Llegada", "Ráfaga", "Inicio", " Fin", "Respuesta", "Espera");
+        System.out.printf("| %-7s | %-7s | %-7s | %-12s | %-18s |\n", "Proceso", "Tiempo", "Ráfaga", "    Momento    ", "      Tiempo     ");
+        System.out.printf("| %-7s | %-7s | %-7s |%-6s|%-6s|%-9s|%-6s|\n", "", "Llegada", "CPU", "--------", "--------", "-----------", "--------");
+        System.out.printf("| %-7s | %-7s | %-7s | %-6s | %-6s | %-9s | %-6s |\n", "", "", "", "Inicio", " Fin", "Respuesta", "Espera");
         System.out.println("----------------------------------------------------------------------");
 
         procesosOrdenados.ejecutarProcesos();
