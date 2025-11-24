@@ -14,12 +14,10 @@ public class ColaProceso{
         procesosListos.addAll(listaProcesos);
     }
 
-    // Ordena los procesos por tiempo de llegada
     public void ordenarProcesos(){
         procesosListos.sort(Comparator.comparingInt(Proceso::getTiempoLlegada));
     }
 
-    // Muestra los procesos en el orden en que se ejecutarán según SJF
     public void procesosOrdenados(){
         ordenarProcesos();
 
@@ -29,8 +27,7 @@ public class ColaProceso{
         
         while (!listaTemporal.isEmpty()){
             ArrayList<Proceso> procesosEnLista = new ArrayList<>();
-            
-            // Buscar procesos que ya llegaron
+
             for (Proceso p: listaTemporal){
                 if (p.getTiempoLlegada() <= momentoActualSimulado){
                     procesosEnLista.add(p);
@@ -58,11 +55,7 @@ public class ColaProceso{
     }
 
     public void ejecutarProcesos(){
-        // Resetear el momento actual antes de ejecutar
-        Main.momentoActual = 0;
-        Main.momentoInicio = 0;
-        Main.momentoFinal = 0;
-        
+
         ordenarProcesos();
 
         ArrayList<Proceso> procesosCompletados = new ArrayList<>();

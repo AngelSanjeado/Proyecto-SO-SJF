@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     public static int momentoActual = 0;
     public static int momentoInicio = 0;
     public static int momentoFinal = 0;
+
     public static void main(String[] arg){
         Scanner sc = new Scanner(System.in);
 
@@ -73,5 +75,3 @@ public class Main {
     }
 }
 
-//Tiempo de respuesta = Tiempo finalización - tiempo de llegada
-//Tiempo de espera = Tiempo de respuesta - tiempo de ráfaga
