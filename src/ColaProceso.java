@@ -55,6 +55,9 @@ public class ColaProceso{
     }
 
     public void ejecutarProcesos(){
+        Main.momentoActual = 0;
+        Main.momentoInicio = 0;
+        Main.momentoFinal = 0;
 
         ordenarProcesos();
 
