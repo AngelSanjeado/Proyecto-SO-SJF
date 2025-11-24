@@ -19,6 +19,7 @@ public class ColaProceso{
     }
 
     public void procesosOrdenados(){
+
         ordenarProcesos();
 
         int momentoActualSimulado = 0;
@@ -26,6 +27,7 @@ public class ColaProceso{
         ArrayList<Proceso> ordenEjecucion = new ArrayList<>();
         
         while (!listaTemporal.isEmpty()){
+
             ArrayList<Proceso> procesosEnLista = new ArrayList<>();
 
             for (Proceso p: listaTemporal){
